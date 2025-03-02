@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Manager Aman</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Muat library CryptoJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Password Manager Aman</h1>
+    
+    <!-- Area Autentikasi (akan diisi oleh app.js) -->
+    <div id="setup"></div>
+    
+    <!-- Area Aplikasi Utama -->
+    <div id="app" style="display:none;">
+      <h2>Tambah Akun</h2>
+<input type="text" id="website" placeholder="Website">
+<input type="text" id="username" placeholder="Username">
+<input type="email" id="email" placeholder="Email">
+<div class="password-group">
+  <input type="password" id="password" placeholder="Password">
+  <button id="generatePasswordBtn" type="button">Generate Password</button>
+  <button id="togglePassword" type="button">Tampilkan</button>
+</div>
+<button id="saveAccountBtn">Simpan Akun</button>
+      <h2>Daftar Akun</h2>
+      <input type="text" id="searchInput" placeholder="Cari Akun...">
+      <div class="button-group">
+        <button id="loadAccountsBtn">Lihat Akun</button>
+        <button id="exportDataBtn">Export Data</button>
+        <button id="importDataBtn">Import Data</button>
+        <button id="printDataBtn">Print Data</button>
+      </div>
+      <table id="accountsTable" style="display:none;">
+        <thead>
+          <tr>
+            <th>Website</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Aksi</th>
+            <th>Riwayat</th>
+          </tr>
+        </thead>
+        <tbody id="accountsBody"></tbody>
+      </table>
+      <!-- Input file tersembunyi untuk import -->
+      <input type="file" id="importFileInput" style="display:none;" accept="application/json">
+    </div>
+  </div>
+  
+  <!-- Impor modul utama -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
