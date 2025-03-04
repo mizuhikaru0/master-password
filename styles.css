@@ -130,3 +130,59 @@ table th {
     flex-direction: column;
   }
 }
+
+/* Style khusus untuk tabel password (#accountsTable) */
+#accountsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.9em;
+}
+
+/* Styling header tabel */
+#accountsTable thead {
+  background-color: var(--light-gray);
+}
+
+#accountsTable th {
+  padding: 12px;
+  border-bottom: 2px solid var(--secondary-color);
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Styling sel tabel */
+#accountsTable td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+/* Zebra striping agar baris lebih mudah dilacak */
+#accountsTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Efek hover untuk meningkatkan interaksi pengguna */
+#accountsTable tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s ease;
+}
+
+/* Styling tombol di dalam tabel (Edit, Hapus, Riwayat) */
+#accountsTable button {
+  padding: 6px 12px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+  margin: 0 3px;
+  transition: background-color 0.3s ease;
+}
+
+#accountsTable button:hover {
+  background-color: var(--primary-hover);
+}
