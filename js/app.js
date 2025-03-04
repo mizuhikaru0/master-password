@@ -7,7 +7,7 @@ let dbInstance = null;
 let accountsCache = []; // Cache untuk data akun yang dimuat
 
 const SESSION_DURATION = 1 * 60 * 60 * 1000; // 1 jam dalam milidetik
-const PASSWORD_UPDATE_THRESHOLD = 90 * 24 * 60 * 60 * 1000; // 90 hari dalam milidetik
+const PASSWORD_UPDATE_THRESHOLD = 30 * 24 * 60 * 60 * 1000; // 30 hari dalam milidetik
 
 // Gunakan sessionStorage untuk menyimpan informasi login (tanpa menyimpan masterKey secara persisten)
 function checkLoginCache() {
