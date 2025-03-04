@@ -1,155 +1,132 @@
-/* Global Styles */
-body {
-  background: #f4f7f9;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* styles.css */
+
+/* Variabel CSS untuk memudahkan penyesuaian tema */
+:root {
+  --primary-color: #3498db;
+  --primary-hover: #2980b9;
+  --secondary-color: #2c3e50;
+  --light-gray: #f2f2f2;
+  --background-color: #f4f4f4;
+  --text-color: #333;
+}
+
+/* Reset dasar agar styling konsisten di semua browser */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: #333;
 }
 
-/* Container Utama */
+/* Styling global untuk body */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Container utama yang membungkus seluruh konten */
 .container {
   max-width: 800px;
-  width: 90%;
-  margin: 50px auto;
-  padding: 20px 30px;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 30px auto;
+  background-color: #fff;
+  padding: 30px;
   border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Judul */
-h1, h2 {
+/* Styling untuk judul utama */
+h1 {
   text-align: center;
-  color: #2c3e50;
+  font-size: 2.2em;
   margin-bottom: 20px;
+  color: var(--secondary-color);
 }
 
-/* Input Fields */
+/* Styling untuk subjudul */
+h2 {
+  text-align: center;
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: var(--secondary-color);
+}
+
+/* Styling untuk input teks, password, email, dan file */
 input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="file"] {
-  width: calc(100% - 22px);
-  padding: 10px;
+  width: 100%;
+  padding: 12px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  transition: border-color 0.3s ease;
+  font-size: 1em;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus {
-  border-color: #3498db;
-  outline: none;
-}
-
-/* Tombol */
+/* Styling dasar untuk tombol */
 button {
-  background: #3498db;
+  padding: 12px 20px;
+  background-color: var(--primary-color);
   color: #fff;
   border: none;
-  padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background: #2980b9;
+  background-color: var(--primary-hover);
 }
 
-/* Grup Tombol */
-.button-group {
+/* Styling khusus untuk grup password yang menggabungkan input dan tombol */
+.password-group {
   display: flex;
-  justify-content: center;
   gap: 10px;
-  flex-wrap: wrap;
   margin-bottom: 15px;
 }
 
-/* Tabel Daftar Akun */
+.password-group input[type="password"] {
+  flex: 1;
+}
+
+/* Styling untuk grup tombol di bawah daftar akun */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Styling untuk tabel daftar akun */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-th, td {
+table th,
+table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px;
   text-align: center;
 }
 
-th {
-  background-color: #3498db;
-  color: #fff;
+table th {
+  background-color: var(--light-gray);
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-/* Tambahan: Buat tabel dapat di-scroll secara horizontal pada layar kecil */
-@media (max-width: 480px) {
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .container {
-    margin: 20px auto;
-    padding: 15px;
-    width: 95%;
-  }
-  h1 {
-    font-size: 1.8em;
-  }
-  h2 {
-    font-size: 1.4em;
-  }
-  button {
-    padding: 8px 12px;
-    font-size: 0.9em;
-  }
-  input[type="text"],
-  input[type="password"],
-  input[type="email"],
-  input[type="file"] {
-    padding: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    margin: 10px auto;
-    padding: 10px;
-    width: 100%;
-    border-radius: 0;
-  }
-  h1 {
-    font-size: 1.5em;
-  }
-  h2 {
-    font-size: 1.2em;
-  }
-  button {
-    padding: 6px 10px;
-    font-size: 0.8em;
-  }
-  input[type="text"],
-  input[type="password"],
-  input[type="email"],
-  input[type="file"] {
-    padding: 6px;
+/* Responsif: Penyesuaian layout untuk layar kecil */
+@media (max-width: 600px) {
+  .password-group {
+    flex-direction: column;
   }
   .button-group {
     flex-direction: column;
-    align-items: stretch;
   }
 }
