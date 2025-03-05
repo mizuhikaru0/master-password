@@ -9,6 +9,30 @@
   <link rel="stylesheet" href="styles.css">
   <!-- Muat library CryptoJS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <!-- Firebase SDK dan konfigurasi, gunakan module script -->
+<script type="module">
+  // Import Firebase App dan Firestore
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+
+  // Konfigurasi Firebase kamu
+  const firebaseConfig = {
+    apiKey: "AIzaSyBwcePh0X8Myb98VZerA8tiBWYecfkKhmk",
+    authDomain: "password-aman.firebaseapp.com",
+    projectId: "password-aman",
+    storageBucket: "password-aman.firebasestorage.app",
+    messagingSenderId: "750148085109",
+    appId: "1:750148085109:web:782a257e01e8d8583e5f3c"
+  };
+
+  // Inisialisasi Firebase
+  const appFirebase = initializeApp(firebaseConfig);
+  const dbFirestore = getFirestore(appFirebase);
+
+  // Ekspos dbFirestore ke global scope agar bisa dipakai di app.js
+  window.dbFirestore = dbFirestore;
+</script>
+
 </head>
 <body>
   <div class="container">
@@ -36,6 +60,9 @@
         <button id="exportDataBtn">Export Data</button>
         <button id="importDataBtn">Import Data</button>
         <button id="printDataBtn">Print Data</button>
+<button id="backupCloudBtn">Backup ke Cloud</button>
+<button id="restoreCloudBtn">Restore dari Cloud</button>
+
       </div>
       <table id="accountsTable" style="display:none;">
         <thead>

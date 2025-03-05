@@ -490,3 +490,53 @@ document.getElementById('togglePassword').addEventListener('click', function () 
     this.innerText = "Tampilkan";
   }
 });
+
+// Fungsi backup data ke Cloud (Firestore)
+async function backupDataToCloud(masterKey, backupData) {
+  try {
+    // Gunakan masterKey sebagai identifier dokumen. Di aplikasi nyata, sebaiknya pakai user ID.
+    const backupDocRef = doc(window.dbFirestore, "backups", masterKey);
+    await setDoc(backupDocRef, {
+      data: backupData,
+      timestamp: new Date().toISOString()
+    });
+    alert("Backup ke cloud berhasil!");
+  } catch (error) {
+    console.error("Backup gagal:", error);
+    alert("Backup ke cloud gagal.");
+  }
+}
+
+// Fungsi restore data dari Cloud (Firestore)
+async function restoreDataFromCloud(masterKey) {
+  try {
+    const backupDocRef = doc(window.dbFirestore, "backups", masterKey);
+    const docSnap = await getDoc(backupDocRef);
+    if (docSnap.exists()) {
+      const backupData = docSnap.data().data;
+      // Proses restore: misalnya, loop data backup dan simpan ke IndexedDB
+      for (const record of backupData) {
+        await saveAccount(dbInstance, record.data);
+      }
+      alert("Data berhasil dipulihkan dari cloud!");
+      // Jika perlu, perbarui tampilan akun di UI
+    } else {
+      alert("Tidak ada data backup di cloud.");
+    }
+  } catch (error) {
+    console.error("Restore gagal:", error);
+    alert("Restore dari cloud gagal.");
+  }
+}
+
+// Tambahkan event listener untuk tombol backup dan restore
+document.getElementById('backupCloudBtn').addEventListener('click', async () => {
+  // Ambil data akun yang sudah dienkripsi dari IndexedDB
+  const encryptedAccounts = await getAccounts(dbInstance);
+  // Misalnya, kita langsung backup array data tersebut
+  backupDataToCloud(masterKey, encryptedAccounts);
+});
+
+document.getElementById('restoreCloudBtn').addEventListener('click', async () => {
+  restoreDataFromCloud(masterKey);
+});
