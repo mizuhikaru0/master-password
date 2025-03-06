@@ -1,6 +1,8 @@
 import { generatePassword } from './config.js';
 import { openDB, saveAccount, getAccounts, updateAccount, deleteAccount } from './db.js';
 import { encryptData, decryptData } from './crypto.js';
+import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+
 
 let masterKey = '';
 let dbInstance = null;
@@ -508,15 +510,23 @@ async function backupDataToCloud(masterKey, backupData) {
 }
 
 // Fungsi restore data dari Cloud (Firestore)
+// Fungsi restore data dari Cloud (Firestore)
 async function restoreDataFromCloud(masterKey) {
   try {
     const backupDocRef = doc(window.dbFirestore, "backups", masterKey);
     const docSnap = await getDoc(backupDocRef);
     if (docSnap.exists()) {
       const backupData = docSnap.data().data;
-      // Proses restore: misalnya, loop data backup dan simpan ke IndexedDB
+      // Proses restore: loop data backup dan simpan ke IndexedDB
       for (const record of backupData) {
-        await saveAccount(dbInstance, record.data);
+        if (record.data) {
+          // Jika record memiliki properti 'data', gunakan langsung
+          await saveAccount(dbInstance, record.data);
+        } else {
+          // Jika tidak, asumsikan format ekspor baru, enkripsi ulang record
+          const encrypted = encryptData(record, masterKey);
+          await saveAccount(dbInstance, encrypted);
+        }
       }
       alert("Data berhasil dipulihkan dari cloud!");
       // Jika perlu, perbarui tampilan akun di UI
@@ -528,6 +538,7 @@ async function restoreDataFromCloud(masterKey) {
     alert("Restore dari cloud gagal.");
   }
 }
+
 
 // Tambahkan event listener untuk tombol backup dan restore
 document.getElementById('backupCloudBtn').addEventListener('click', async () => {
